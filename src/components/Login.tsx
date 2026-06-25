@@ -144,8 +144,8 @@ export function Login({ onLogin, onGoRegister }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center p-4">
-      <div className="w-full max-w-[430px] bg-white p-6 rounded-2xl shadow-xl shadow-teal-900/5 border border-gray-100">
+    <div className="min-h-screen bg-[#FAF7F2] flex flex-col items-center justify-center p-4 relative">
+      <div className="w-full max-w-[430px] bg-white p-6 rounded-2xl shadow-xl shadow-teal-900/5 border border-gray-100 z-10">
         <div className="flex justify-center mb-5">
           <div className="w-12 h-12 bg-teal-600 rounded-2xl flex items-center justify-center shadow-md overflow-hidden">
             <img src="/favicon.svg" alt="Logo" className="w-[85%] h-[85%] object-contain" />
@@ -255,6 +255,9 @@ export function Login({ onLogin, onGoRegister }: LoginProps) {
             Solicitar credencial de acesso
           </button>
         </div>
+      </div>
+      <div className="absolute bottom-6 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+        Developed by JR
       </div>
     </div>
   );
