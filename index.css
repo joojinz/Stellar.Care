@@ -1,0 +1,47 @@
+import { motion, useScroll, useMotionTemplate, useTransform } from 'motion/react';
+
+export default function Header() {
+  const { scrollY } = useScroll();
+  const bgOpacity = useTransform(scrollY, [0, 50], [0, 0.95]);
+  const blur = useTransform(scrollY, [0, 50], [0, 12]);
+  const borderOpacity = useTransform(scrollY, [0, 50], [0, 1]);
+  
+  const backgroundColor = useMotionTemplate`rgba(255, 255, 255, ${bgOpacity})`;
+  const backdropFilter = useMotionTemplate`blur(${blur}px)`;
+  const borderBottom = useMotionTemplate`1px solid rgba(226, 232, 240, ${borderOpacity})`;
+
+  return (
+    <motion.header 
+      className="fixed top-0 w-full z-50 h-20"
+      style={{ backgroundColor, backdropFilter, borderBottom }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-full flex items-center justify-between">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex items-center gap-3"
+        >
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden shadow-sm bg-[#0ca593]/10">
+            <img src="https://raw.githubusercontent.com/joojinz/Stellar.Care/main/public/favicon.svg" alt="StellarCare Logo" className="w-full h-full object-cover" />
+          </div>
+          <span className="font-bold text-xl tracking-tight text-slate-900">Stellar<span className="font-light">Care</span></span>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-slate-800 border border-slate-700 transition-colors"
+          >
+            <span>Acessar Sistema</span>
+          </a>
+        </motion.div>
+      </div>
+    </motion.header>
+  );
+}

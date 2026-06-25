@@ -1,6 +1,84 @@
-{
-  "name": "Stellar Care",
-  "description": "Aplicativo de sistematização e controle de evoluções de enfermagem com triagem de sinais vitais, validação assistencial baseada em inteligência clínica e registro seguro SHA256.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+import { motion } from 'motion/react';
+import { ShieldCheck, Lock, FileKey, Server } from 'lucide-react';
+
+const securityFeatures = [
+  {
+    icon: <Lock className="w-6 h-6" />,
+    title: "Criptografia de Ponta a Ponta",
+    description: "Todos os dados sensíveis dos pacientes são criptografados no dispositivo antes de serem sincronizados, garantindo que apenas profissionais autorizados tenham acesso."
+  },
+  {
+    icon: <ShieldCheck className="w-6 h-6" />,
+    title: "Conformidade LGPD & HIPAA",
+    description: "Arquitetura desenhada desde o primeiro dia para atender aos mais rigorosos padrões de proteção de dados de saúde no Brasil e no mundo."
+  },
+  {
+    icon: <FileKey className="w-6 h-6" />,
+    title: "Controle de Acesso Granular",
+    description: "Defina permissões específicas baseadas em funções (médicos, enfermeiros, administradores) com trilhas de auditoria imutáveis."
+  },
+  {
+    icon: <Server className="w-6 h-6" />,
+    title: "Soberania de Dados",
+    description: "Sendo Open Source, você pode hospedar o StellarCare nos seus próprios servidores (On-Premise), mantendo controle total sobre onde e como os dados são armazenados."
+  }
+];
+
+export default function Security() {
+  return (
+    <section className="py-24 sm:py-32 bg-slate-900 text-white relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#0ca593]/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-teal-300 text-sm font-medium mb-6">
+                <ShieldCheck className="w-4 h-4" />
+                Segurança Nível Militar
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+                Privacidade por <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0ca593] to-teal-400">
+                  design e por padrão
+                </span>
+              </h2>
+              <p className="text-slate-400 text-base sm:text-lg font-light leading-relaxed mb-8">
+                Entendemos que os dados de saúde são as informações mais sensíveis que existem. Nossa arquitetura offline-first não apenas garante disponibilidade, mas também isola os dados na ponta antes de qualquer transmissão.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {securityFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-3xl hover:bg-white/10 hover:border-white/20 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-[#0ca593]/20 flex items-center justify-center text-teal-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-slate-400 font-light text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
